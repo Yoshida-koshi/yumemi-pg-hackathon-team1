@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'hackathon_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'yumemi_pg_hackathon_db',
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'HOST': 'db',
+        'PORT': '3306'
     }
 }
 

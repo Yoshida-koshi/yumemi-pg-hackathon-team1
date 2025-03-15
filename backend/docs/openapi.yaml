@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: YUMEMI×PGハッカソン API仕様書
+  version: 1.0.0
+  description: ハッカソンのAPI仕様書。
+servers:
+  - url: 'http://localhost:8003'
+paths:
+  /admin:
+    get:
+      tags:
+        - Admin
+      description: 管理画面にアクセスする
+      responses:
+        '200':
+          description: 成功
+        '401':
+          description: not authorized
+        '500':
+          description: internal server error

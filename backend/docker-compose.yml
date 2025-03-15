@@ -1,0 +1,59 @@
+services:
+  db:
+    container_name: yumemi-pg-hackathon-db
+    image: mysql
+    volumes:
+      - db-store:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: yumemi_pg_hackathon_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    healthcheck:
+      test: mysqladmin ping
+      interval: 15s
+      retries: 5
+    
+  backend:
+    container_name: yumemi-pg-hackathon-backend
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    tty: true
+
+  swagger-editor:
+    image: swaggerapi/swagger-editor
+    container_name: yumemi-pg-hackathon-swagger-editor
+    ports:
+      - "8001:8080"
+  
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: yumemi-pg-hackathon-swagger-ui
+    ports:
+      - "8002:8080"
+    volumes:
+      - ./docs/openapi.yaml:/openapi.yaml
+    environment:
+      SWAGGER_JSON: /openapi.yaml
+  
+  swagger-api:
+    image: stoplight/prism:3
+    container_name: yumemi-pg-hackathon-swagger-api
+    ports:
+      - "8003:4010"
+    command: mock -h 0.0.0.0 /openapi.yaml
+    volumes:
+      - ./docs/openapi.yaml:/openapi.yaml
+
+volumes:
+  db-store:
+    
