@@ -6,6 +6,7 @@ __version__ = '1.0.0'
 __date__ = '2025/03/17 (Created: 2025/03/17)'
 
 """ DBモデルの定義 """
+
 from django.db import models
 
 class Users(models.Model):
@@ -14,6 +15,7 @@ class Users(models.Model):
     email_address = models.EmailField(not_null=True)
     password = models.CharField(max_length=100)
     registered_date = models.DateTimeField(auto_now_add=True, not_null=True)
+    # point = models.IntegerField(default=0, not_null=True)
 
     def __str__(self):
         return self.user_name
@@ -39,6 +41,9 @@ class Habits(models.Model):
     enabled_notification = models.BooleanField(default=True, not_null=True)
     judge_time = models.DateTimeField(not_null=True, not_null=True)
     period_id = models.ForeignKey(Period, not_null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.habit_name
 
 class Notifications(models.Model):
     """ 通知情報 """
