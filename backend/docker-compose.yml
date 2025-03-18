@@ -52,8 +52,8 @@ services:
       - "8003:4010"
     command: mock -h 0.0.0.0 /openapi.yaml
     volumes:
-      - ./docs/openapi.yaml:/openapi.yaml
-
+      - ./docs/openapi.yaml:/openapi.yaml    
 volumes:
   db-store:
-    
+
+  
