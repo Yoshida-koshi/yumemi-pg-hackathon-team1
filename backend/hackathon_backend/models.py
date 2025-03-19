@@ -36,11 +36,12 @@ class Period(models.Model):
 class Habits(models.Model):
     """ 習慣情報 """
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    payment_id = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    payment_id = models.ForeignKey(Payment, null=True, on_delete=models.CASCADE)
     habit_name = models.CharField(max_length=100, null=False)
+    judge_method = models.CharField(max_length=200, null=False, default='')
     enabled_notification = models.BooleanField(default=True, null=False)
     judge_time = models.DateTimeField(null=False)
-    period_id = models.ForeignKey(Period, null=False, on_delete=models.CASCADE)
+    period_id = models.ForeignKey(Period, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.habit_name

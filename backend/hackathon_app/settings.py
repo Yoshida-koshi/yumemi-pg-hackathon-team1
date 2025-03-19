@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8000",  # React / Vue などのフロントエンド
+]
+
 
 # Application definition
 
