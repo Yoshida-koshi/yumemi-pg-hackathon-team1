@@ -1,259 +1,13 @@
+# author: asameshi
+
 openapi: 3.0.0
 info:
   title: YUMEMI×PGハッカソン API仕様書
   version: 1.0.0
   description: ハッカソンのAPI仕様書。
 servers:
-  - url: 'http://localhost:8003'
+  - url: "http://localhost:8003"
 paths:
-  /admin:
-    get:
-      tags:
-        - Admin
-      description: 管理画面にアクセスする
-      responses:
-        '200':
-          description: success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        '400':
-          description: not authorized
-          content:
-            application/json:
-              schema:
-                  $ref: "#/components/schemas/BadRequestError"
-        '404':
-          description: not authorized
-          content:
-            application/json:
-              schema:
-                  $ref: "#/components/schemas/NotFoundError"
-        '500':
-          description: internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-  /admin/{userId}/habits:
-    get:
-      tags:
-        - habits
-      description: ユーザーが自分の習慣を取得
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: ユーザーID
-          schema:
-            type: string
-      responses:
-        '200':
-          description: success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    habitId:
-                      type: string
-                      description: "習慣ID"
-                    name:
-                      type: string
-                      description: "習慣名"
-        '400':
-          description: Invalid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        '404':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFoundError"
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-    post:
-      tags:
-        - habits
-      description: ユーザーが新しい習慣を作成
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: ユーザーID
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: "新しい習慣の名前"
-      responses:
-        '201':
-          description: Habit created successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  habitId:
-                    type: string
-                    description: "習慣ID"
-                  name:
-                    type: string
-                    description: "習慣名"
-        '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-  /admin/{userId}/habits/{habitId}:
-    put:
-      tags:
-        - habits
-      description: ユーザーが習慣を更新
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: ユーザーID
-          schema:
-            type: string
-        - name: habitId
-          in: path
-          required: true
-          description: 習慣ID
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: "更新する習慣の名前"
-      responses:
-        '200':
-          description: Habit updated successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  habitId:
-                    type: string
-                    description: "習慣ID"
-                  name:
-                    type: string
-                    description: "習慣名"
-        '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        '404':
-          description: Habit not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFoundError"
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-    delete:
-      tags:
-        - habits
-      description: ユーザーが習慣を削除
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: ユーザーID
-          schema:
-            type: string
-        - name: habitId
-          in: path
-          required: true
-          description: 習慣ID
-          schema:
-            type: string
-      responses:
-        '204':
-          description: Habit deleted successfully
-        '400':
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        '404':
-          description: Habit not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFoundError"
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-  /admin/notification:
-    post:
-      tags:
-        - notifications
-      description: 通知送信
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  description: "通知メッセージ"
-      responses:
-        '200':
-          description: Notification sent successfully
-        '400':
-          description: Invalid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
   /auth/signin:
     post:
       tags:
@@ -272,7 +26,7 @@ paths:
                   type: string
                   description: "ユーザーのパスワード"
       responses:
-        '200':
+        "200":
           description: Logged in successfully
           content:
             application/json:
@@ -282,13 +36,13 @@ paths:
                   token:
                     type: string
                     description: "認証トークン"
-        '400':
+        "400":
           description: Invalid credentials
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequestError"
-        '500':
+        "500":
           description: Internal server error
           content:
             application/json:
@@ -315,7 +69,7 @@ paths:
                   type: string
                   description: "ユーザーのパスワード"
       responses:
-        '201':
+        "201":
           description: User created successfully
           content:
             application/json:
@@ -328,18 +82,460 @@ paths:
                   token:
                     type: string
                     description: "認証トークン"
-        '400':
+        "400":
           description: Invalid input
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequestError"
-        '500':
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
+  /user:
+    post:
+      tags:
+        - user
+      description: ユーザー情報を作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "ユーザー名"
+                email:
+                  type: string
+                  description: "ユーザーのメールアドレス"
+                password:
+                  type: string
+                  description: "ユーザーのパスワード"
+      responses:
+        "201":
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    description: "ユーザーID"
+                  token:
+                    type: string
+                    description: "認証トークン"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /user/{userId}:
+    get:
+      tags:
+        - user
+      description: ユーザー情報を取得
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: "ユーザーID"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    description: "ユーザーID"
+                  name:
+                    type: string
+                    description: "ユーザー名"
+                  email:
+                    type: string
+                    description: "ユーザーのメールアドレス"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+    post:
+      tags:
+        - user
+      description: 習慣を追加
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: "ユーザーID"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                habit:
+                  type: string
+                  description: "習慣名"
+                goal:
+                  type: string
+                  description: "目標"
+                startDate:
+                  type: string
+                  description: "開始日"
+                endDate:
+                  type: string
+                  description: "終了日"
+      responses:
+        "201":
+          description: Habit created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  habitId:
+                    type: string
+                    description: "習慣ID"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /user/{userId}/habits/{habitId}:
+    put:
+      tags:
+        - user
+      description: 習慣を更新
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: "ユーザーID"
+          schema:
+            type: string
+        - name: habitId
+          in: path
+          required: true
+          description: "習慣ID"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                habit_name:
+                  type: string
+                  description: "習慣名"
+                judge_time:
+                  type: string
+                  description: "2025/03/15 00:00:00"
+                period:
+                  type: string
+                  description: "期間"
+      responses:
+        "200":
+          description: Habit updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  habitId:
+                    type: string
+                    description: "習慣ID"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        "404":
+          description: Habit not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+    delete:
+      tags:
+        - user
+      description: 習慣を削除
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: "ユーザーID"
+          schema:
+            type: string
+        - name: habitId
+          in: path
+          required: true
+          description: "習慣ID"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Habit deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  habitId:
+                    type: string
+                    description: "習慣ID"
+        "404":
+          description: Habit not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /usr/notification:
+    post:
+      tags:
+        - user
+      description: 通知を作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: "ユーザーID"
+                habitId:
+                  type: string
+                  description: "習慣ID"
+                notificationTime: # 元々はnotificationDateだったが、notificationTimeに変更
+                  type: string
+                  description: "通知時間"
+                notificationContent:
+                  type: string
+                  description: "通知内容"
+                NotificationStatus:
+                  type: boolean
+                  description: "通知ステータス"
+      responses:
+        "201":
+          description: Notification created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notificationId:
+                    type: string
+                    description: "通知ID"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /user/payment/{userId}:
+    post:
+      tags:
+        - user
+      description: 支払い情報を作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: "ユーザーID"
+                creditNumber:
+                  type: string
+                  description: "クレジットカード番号"
+                expirationDate: # 元々はexpireDateだったが、expirationDateに変更
+                  type: string
+                  description: "有効期限"
+                securityCode:
+                  type: string
+                  description: "セキュリティコード"
+      responses:
+        "201":
+          description: Payment created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentId:
+                    type: string
+                    description: "支払いID"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+    put:
+      tags:
+        - user
+      description: 支払い情報を更新
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: "ユーザーID"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: "ユーザーID"
+                creditNumber:
+                  type: string
+                  description: "クレジットカード番号"
+                expirationDate: # 元々はexpireDateだったが、expirationDateに変更
+                  type: string
+                  description: "有効期限"
+                securityCode:
+                  type: string
+                  description: "セキュリティコード"
+      responses:
+        "200":
+          description: Payment updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentId:
+                    type: string
+                    description: "支払いID"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        "404":
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /log:
+    post:
+      tags:
+        - log
+      description: ログを作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: "ユーザーID"
+                habitId:
+                  type: string
+                  description: "習慣ID"
+                logDate:
+                  type: string
+                  description: "日付"
+                logContent:
+                  type: string
+                  description: "ログ内容"
+      responses:
+        "201":
+          description: Log created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logId:
+                    type: string
+                    description: "ログID"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+
 
 components:
   schemas:
