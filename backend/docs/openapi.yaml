@@ -13,10 +13,378 @@ paths:
       description: 管理画面にアクセスする
       responses:
         '200':
-          description: 成功
-        '401':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '400':
           description: not authorized
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/BadRequestError"
+        '404':
+          description: not authorized
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/NotFoundError"
         '500':
           description: internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /admin/{userId}/habits:
+    get:
+      tags:
+        - habits
+      description: ユーザーが自分の習慣を取得
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ユーザーID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    habitId:
+                      type: string
+                      description: "習慣ID"
+                    name:
+                      type: string
+                      description: "習慣名"
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+    post:
+      tags:
+        - habits
+      description: ユーザーが新しい習慣を作成
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ユーザーID
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "新しい習慣の名前"
+      responses:
+        '201':
+          description: Habit created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  habitId:
+                    type: string
+                    description: "習慣ID"
+                  name:
+                    type: string
+                    description: "習慣名"
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /admin/{userId}/habits/{habitId}:
+    put:
+      tags:
+        - habits
+      description: ユーザーが習慣を更新
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ユーザーID
+          schema:
+            type: string
+        - name: habitId
+          in: path
+          required: true
+          description: 習慣ID
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "更新する習慣の名前"
+      responses:
+        '200':
+          description: Habit updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  habitId:
+                    type: string
+                    description: "習慣ID"
+                  name:
+                    type: string
+                    description: "習慣名"
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '404':
+          description: Habit not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+    delete:
+      tags:
+        - habits
+      description: ユーザーが習慣を削除
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ユーザーID
+          schema:
+            type: string
+        - name: habitId
+          in: path
+          required: true
+          description: 習慣ID
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Habit deleted successfully
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '404':
+          description: Habit not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /admin/notification:
+    post:
+      tags:
+        - notifications
+      description: 通知送信
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: "通知メッセージ"
+      responses:
+        '200':
+          description: Notification sent successfully
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /auth/signin:
+    post:
+      tags:
+        - auth
+      description: ログイン
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "ユーザーのメールアドレス"
+                password:
+                  type: string
+                  description: "ユーザーのパスワード"
+      responses:
+        '200':
+          description: Logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: "認証トークン"
+        '400':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /auth/signup:
+    post:
+      tags:
+        - auth
+      description: 新規ユーザー登録
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "ユーザー名"
+                email:
+                  type: string
+                  description: "ユーザーのメールアドレス"
+                password:
+                  type: string
+                  description: "ユーザーのパスワード"
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    description: "ユーザーID"
+                  token:
+                    type: string
+                    description: "認証トークン"
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
 
-          hohohohoho
+components:
+  schemas:
+    BadRequestError:
+      type: object
+      properties:
+        ErrorCode:
+          type: number
+          description: エラーコード
+          example: 400
+        ErrorMessageJP:
+          type: string
+          description: エラーメッセージ（日本語）
+          example: "バリデーションエラー"
+        ErrorMessageEN:
+          type: string
+          description: エラーメッセージ（英語）
+          example: "validation error"
+    NotFoundError:
+      type: object
+      properties:
+        ErrorCode:
+          type: number
+          description: エラーコード
+          example: 404
+        ErrorMessageJP:
+          type: string
+          description: エラーメッセージ（日本語）
+          example: "そのスレッドは存在しません。"
+        ErrorMessageEN:
+          type: string
+          description: エラーメッセージ（英語）
+          example: "This thread is not exists."
+    InternalServerError:
+      type: object
+      properties:
+        ErrorCode:
+          type: number
+          description: エラーコード
+          example: 500
+        ErrorMessageJP:
+          type: string
+          description: エラーメッセージ（日本語）
+          example: "サーバでエラーが発生しました。"
+        ErrorMessageEN:
+          type: string
+          description: エラーメッセージ（英語）
+          example: "Error occurred at server."
