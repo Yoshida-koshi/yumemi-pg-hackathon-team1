@@ -52,7 +52,7 @@ class _signupPageState extends State<signupPage>{
               ),
               GestureDetector(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => forgotPage()));
+
                 },
                 child: Text("ゲストログイン",
                   style: TextStyle(fontWeight: FontWeight.bold,
