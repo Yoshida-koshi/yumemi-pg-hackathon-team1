@@ -12,7 +12,7 @@ class _createPageState extends State<koumokuPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
             Center(
             child: Column(
@@ -38,8 +38,13 @@ class _createPageState extends State<koumokuPage>{
                         width: 2.0,
                                 ),
                               ),
-                    child: Text("項目名",
-                    style: TextStyle(fontSize: 25),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("早起き",
+                          style: TextStyle(fontSize: 25),
+                        ),
+                      ],
                     ),
                   ),
                 Container(
@@ -52,8 +57,25 @@ class _createPageState extends State<koumokuPage>{
                       width: 2.0,
                     ),
                   ),
-                  child: Text("項目名",
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  Text("項目名",
                     style: TextStyle(fontSize: 25),
+                  ),
+                      ElevatedButton(
+                        onPressed: (){
+
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.amber
+                        ),
+                        child: Text("達成画面へ",
+                          style: TextStyle(
+                              color: Colors.white),
+                        ),
+                      ),
+                  ],
                   ),
                 ),
               ],
@@ -73,8 +95,13 @@ class _createPageState extends State<koumokuPage>{
                 width: 2.0,
               ),
             ),
-            child: Text("項目名",
-              style: TextStyle(fontSize: 25),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("項目名",
+                  style: TextStyle(fontSize: 25),
+                ),
+              ],
             ),
           ),
               Container(
@@ -87,8 +114,13 @@ class _createPageState extends State<koumokuPage>{
                     width: 2.0,
                   ),
                 ),
-                child: Text("項目名",
-                  style: TextStyle(fontSize: 25),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("項目名",
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ],
                 ),
               ),
             ],
