@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '31.dart';
 
 class mappinPage extends StatefulWidget {
   const mappinPage({Key? key}) : super(key: key);
@@ -13,8 +14,22 @@ class _createPageState extends State<mappinPage>{
 
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => settingPage()));
+                  },
+                  child: Image.asset("images/Vector.png",
+                  height: 70,
+                      width: 70),
+                ),
+              ],
+            ),
             ElevatedButton(
               onPressed: (){
 

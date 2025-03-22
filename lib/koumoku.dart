@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '31.dart';
 import '32.dart';
+import '33.dart';
+import '34.dart';
+import '37.dart';
 
 class koumokuPage extends StatefulWidget {
   const koumokuPage({Key? key}) : super(key: key);
@@ -68,7 +71,8 @@ class _createPageState extends State<koumokuPage>{
                   ),
                       ElevatedButton(
                         onPressed: (){
-
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => paymentPage()));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.amber
