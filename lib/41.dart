@@ -24,7 +24,7 @@ class _createPageState extends State<loginPage>{
                 border: OutlineInputBorder(),
               ),
             ),
-            Text("パスワード"),
+            Text("\nパスワード"),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
