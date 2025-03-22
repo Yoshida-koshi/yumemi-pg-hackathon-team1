@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '39.dart';
+import 'main.dart';
 
 class repassPage extends StatefulWidget {
   const repassPage({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _createPageState extends State<repassPage>{
               children: [
                 ElevatedButton(
                     onPressed: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => signupPage()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => MyHomePage(title: '',)));
                     },
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(314, 63),

@@ -13,15 +13,22 @@ class _createPageState extends State<optionPage>{
 
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.min,
           children: [
+            Text("通知"),
             GestureDetector(
               onTap: (){
 
               },
-              child: Image.asset("images/toggleon.png",
+              child: Image.asset("images/toggleoff.png",
               height: 70,
               width: 70),
+            ),
+            GestureDetector(
+              onTap: (){
+
+              },
+              child: Text("ログアウト"),
             ),
           ],
         ),
