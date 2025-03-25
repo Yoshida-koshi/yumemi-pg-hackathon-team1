@@ -236,47 +236,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
-  /user/{userId}/habits/{habitId}:
-    delete:
-      tags:
-        - user
-      description: 習慣を削除
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: "ユーザーID"
-          schema:
-            type: string
-        - name: habitId
-          in: path
-          required: true
-          description: "習慣ID"
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Habit deleted successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  habitId:
-                    type: string
-                    description: "習慣ID"
-        "404":
-          description: Habit not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFoundError"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
   /usr/notification:
     post:
       tags:
@@ -640,6 +599,50 @@ paths:
                   message: 
                     type: string
                     example: 習慣化項目が存在しません
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - Habit
+      description: 習慣化項目を削除する
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          description: 削除したい習慣化項目のID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 習慣化項目の削除に成功しました
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 習慣化項目が存在しません
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: メソッド "DELETE" は許されていません。
         '500':
           description: Internal Server Error
 

@@ -44,5 +44,13 @@ class PutDeleteHabitView(views.APIView):
             return Response({"message": "習慣化項目が存在しません"}, status=status.HTTP_404_NOT_FOUND)
         habit.update(habit_name=data.get('habit_name'), judge_method=data.get('judge_method'), judge_time=data.get('judge_time'), enabled_notification=data.get('enabled_notification'), payment_money=data.get('payment_money'), payment_method=data.get('payment_method'))
         return Response({"message": "習慣化項目を更新しました"}, status=status.HTTP_200_OK)
+    
+    def delete(self, request, id, *args, **kwargs):
+        habit = Habits.objects.filter(id=id)
+        if not habit.exists():
+            return Response({"message": "習慣化項目が存在しません"}, status=status.HTTP_404_NOT_FOUND)
+
+        habit.delete()
+        return Response({"message": "習慣化項目の削除に成功しました"}, status=status.HTTP_200_OK)
 
 # Create your views here.
