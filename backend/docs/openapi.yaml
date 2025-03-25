@@ -7,6 +7,9 @@ info:
   description: ハッカソンのAPI仕様書。
 servers:
   - url: "http://localhost:8003"
+tags:
+  - name: Habit
+    description: 習慣
 paths:
   /auth/signin:
     post:
@@ -104,15 +107,17 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - email_address
+                - password
               properties:
-                name:
+                email_address:
                   type: string
-                  description: "ユーザー名"
-                email:
-                  type: string
+                  example: example@example.com
                   description: "ユーザーのメールアドレス"
                 password:
                   type: string
+                  example: fasdfasdf
                   description: "ユーザーのパスワード"
       responses:
         "201":
@@ -122,12 +127,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  userId:
+                  message:
                     type: string
-                    description: "ユーザーID"
-                  token:
-                    type: string
-                    description: "認証トークン"
+                    example: ユーザーを登録しました
         "400":
           description: Invalid input
           content:
@@ -160,171 +162,16 @@ paths:
               schema:
                 type: object
                 properties:
-                  userId:
-                    type: string
+                  id:
+                    type: integer
+                    example: 2
                     description: "ユーザーID"
-                  name:
+                  email_address:
                     type: string
+                    example: example3@example.com
                     description: "ユーザー名"
-                  email:
-                    type: string
-                    description: "ユーザーのメールアドレス"
         "404":
           description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFoundError"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-    post:
-      tags:
-        - user
-      description: 習慣を追加
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: "ユーザーID"
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                habit:
-                  type: string
-                  description: "習慣名"
-                goal:
-                  type: string
-                  description: "目標"
-                startDate:
-                  type: string
-                  description: "開始日"
-                endDate:
-                  type: string
-                  description: "終了日"
-      responses:
-        "201":
-          description: Habit created successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  habitId:
-                    type: string
-                    description: "習慣ID"
-        "400":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-  /user/{userId}/habits/{habitId}:
-    put:
-      tags:
-        - user
-      description: 習慣を更新
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: "ユーザーID"
-          schema:
-            type: string
-        - name: habitId
-          in: path
-          required: true
-          description: "習慣ID"
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                habit_name:
-                  type: string
-                  description: "習慣名"
-                judge_time:
-                  type: string
-                  description: "2025/03/15 00:00:00"
-                period:
-                  type: string
-                  description: "期間"
-      responses:
-        "200":
-          description: Habit updated successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  habitId:
-                    type: string
-                    description: "習慣ID"
-        "400":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        "404":
-          description: Habit not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFoundError"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-    delete:
-      tags:
-        - user
-      description: 習慣を削除
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: "ユーザーID"
-          schema:
-            type: string
-        - name: habitId
-          in: path
-          required: true
-          description: "習慣ID"
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Habit deleted successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  habitId:
-                    type: string
-                    description: "習慣ID"
-        "404":
-          description: Habit not found
           content:
             application/json:
               schema:
@@ -389,6 +236,13 @@ paths:
       tags:
         - user
       description: 支払い情報を作成
+      parameters:
+        - name: userId
+          description: 支払い情報を作成するユーザーID
+          in: path
+          required: true
+          schema: 
+            type: integer
       requestBody:
         content:
           application/json:
@@ -534,7 +388,265 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
-
+  /habits:
+    get:
+      tags:
+        - Habit
+      description: 習慣化項目を取得する
+      parameters:
+        - name: user_id
+          in: query
+          schema: 
+            type: integer
+          required: true
+          description: 習慣化項目を取得するユーザーID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - type: object
+                      properties:
+                        habit_name:
+                          type: string
+                          example: 早起き
+                        judge_time:
+                          type: string
+                          example: 08:00
+                        payment_money:
+                          type: integer
+                          example: 500
+                        judge_method:
+                          type: string
+                          example: 位置情報
+                        enable_notification:
+                          type: boolean
+                          example: true
+                        payment_method:
+                          type: string
+                          example: クレジットカード
+                    - type: object
+                      properties:
+                        habit_name:
+                          type: string
+                          example: 筋トレ
+                        judge_time:
+                          type: string
+                          example: 12:00
+                        payment_money:
+                          type: integer
+                          example: 300
+                        judge_method:
+                          type: string
+                          example: 位置情報
+                        enable_notification:
+                          type: boolean
+                          example: false
+                        payment_method:
+                          type: string
+                          example: クレジットカード
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: user_idが空または存在しません
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ユーザーが存在しません
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - Habit
+      description: 習慣化項目を追加する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                habit_name:
+                  type: string
+                  example: 筋トレ
+                judge_method:
+                  type: string
+                  example: 位置情報
+                enabled_notification:
+                  type: string
+                  example: true
+                judge_time:
+                  type: string
+                  example: 09:00
+                user_id:
+                  type: integer
+                  example: 2
+                payment_money:
+                  type: integer
+                  example: 500
+                payment_method:
+                  type: string
+                  example: クレジットカード
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 習慣化項目の追加に成功しました
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  habit_name:
+                    type: array
+                    items:
+                      type: string
+                      example: この項目は必須です。
+        '500':
+          description: Internal Server Error
+  /habits/{id}:
+    put:
+      tags:
+        - Habit
+      description: 習慣化項目を更新する
+      parameters:
+        - name: id
+          in: path
+          schema: 
+            type: integer
+          required: true
+          description: 更新する習慣化項目のID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - habit_name
+                - judge_method
+                - judge_time
+                - enable_notification
+                - payment_money
+                - payment_method
+              properties:
+                habit_name:
+                  type: string
+                  example: 筋トレ
+                judge_method:
+                  type: string
+                  example: 腹筋回数
+                judge_time:
+                  type: string
+                  example: 09:00
+                enabled_notification:
+                  type: boolean
+                  example: true
+                payment_money:
+                  type: integer
+                  example: 500
+                payment_method:
+                  type: string
+                  example: クレジットカード
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: 習慣化項目を更新しました
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: habit_nameが存在しません
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: 習慣化項目が存在しません
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - Habit
+      description: 習慣化項目を削除する
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          description: 削除したい習慣化項目のID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 習慣化項目の削除に成功しました
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 習慣化項目が存在しません
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: メソッド "DELETE" は許されていません。
+        '500':
+          description: Internal Server Error
 
 
 components:
