@@ -107,15 +107,17 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - email_address
+                - password
               properties:
-                name:
+                email_address:
                   type: string
-                  description: "ユーザー名"
-                email:
-                  type: string
+                  example: example@example.com
                   description: "ユーザーのメールアドレス"
                 password:
                   type: string
+                  example: fasdfasdf
                   description: "ユーザーのパスワード"
       responses:
         "201":
@@ -125,12 +127,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  userId:
+                  message:
                     type: string
-                    description: "ユーザーID"
-                  token:
-                    type: string
-                    description: "認証トークン"
+                    example: ユーザーを登録しました
         "400":
           description: Invalid input
           content:
