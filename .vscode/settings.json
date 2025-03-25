@@ -1,5 +1,7 @@
 {
     "yaml.schemas": {
         "swaggerviewer:openapi": "file:///Users/miyaketakashidai/Desktop/yumemi-pg-hackathon-team1/backend/docs/openapi.yaml"
-    }
+    },
+    "python.defaultInterpreterPath": "${workspaceFolder}/backend/venv/bin/python",
+    "python.analysis.extraPaths": ["${workspaceFolder}/backend"]
 }
