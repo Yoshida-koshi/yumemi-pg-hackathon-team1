@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import views, status
-from .serializer import HabitsSerializer
+from .serializer import HabitsSerializer, UsersSerializer
 from rest_framework.response import Response
 from .models import Habits, Users
 
@@ -52,5 +52,12 @@ class PutDeleteHabitView(views.APIView):
 
         habit.delete()
         return Response({"message": "習慣化項目の削除に成功しました"}, status=status.HTTP_200_OK)
+    
+class UserView(views.APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = UsersSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"message": "ユーザーを登録しました"}, status=status.HTTP_201_CREATED)
 
 # Create your views here.

@@ -5,5 +5,6 @@ from . import views
 
 urlpatterns = [
     path('habits', views.HabitViews.as_view()),
-    path('habits/<int:id>', views.PutDeleteHabitView.as_view())
+    path('habits/<int:id>', views.PutDeleteHabitView.as_view()),
+    path('user', views.UserView.as_view())
 ]
