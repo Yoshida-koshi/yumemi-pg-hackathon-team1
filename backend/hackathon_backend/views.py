@@ -23,5 +23,26 @@ class HabitViews(views.APIView):
         habit_list = Habits.objects.filter(user_id=user_id)
         serializer = HabitsSerializer(habit_list, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-        
+
+class PutDeleteHabitView(views.APIView):
+    def put(self, request, id, *args, **kwargs):
+        data = request.data
+        if not data.get('habit_name'):
+            return Response({"message": "habit_nameは空または存在しません"}, status=status.HTTP_400_BAD_REQUEST)
+        if not data.get('judge_method'):
+            return Response({"message": "judge_methodは空または存在しません"}, status=status.HTTP_400_BAD_REQUEST)
+        if not data.get('judge_time'):
+            return Response({"message": "judge_timeは空または存在しません"}, status=status.HTTP_400_BAD_REQUEST)
+        if not "enabled_notification" in request.data:
+            return Response({"message": "enabled_notificationは存在しません"}, status=status.HTTP_400_BAD_REQUEST)
+        if not "payment_money" in request.data:
+            return Response({"message": "payment_moneyは存在しません"}, status=status.HTTP_400_BAD_REQUEST)
+        if not data.get('payment_method'):
+            return Response({"message": "payment_methodは空または存在しません"}, status=status.HTTP_400_BAD_REQUEST)
+        habit = Habits.objects.filter(id=id)
+        if not habit.exists():
+            return Response({"message": "習慣化項目が存在しません"}, status=status.HTTP_404_NOT_FOUND)
+        habit.update(habit_name=data.get('habit_name'), judge_method=data.get('judge_method'), judge_time=data.get('judge_time'), enabled_notification=data.get('enabled_notification'), payment_money=data.get('payment_money'), payment_method=data.get('payment_method'))
+        return Response({"message": "習慣化項目を更新しました"}, status=status.HTTP_200_OK)
+
 # Create your views here.
