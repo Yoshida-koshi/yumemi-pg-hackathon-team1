@@ -19,5 +19,4 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('hackathon_backend.urls')),
-    path('thanks/', include('hackathon_frontend.urls')),
 ]
