@@ -633,6 +633,16 @@ paths:
                   message:
                     type: string
                     example: 習慣化項目が存在しません
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: メソッド "DELETE" は許されていません。
         '500':
           description: Internal Server Error
 
