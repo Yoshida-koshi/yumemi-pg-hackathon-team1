@@ -600,7 +600,7 @@ paths:
                 judge_time:
                   type: string
                   example: 09:00
-                enable_notification:
+                enabled_notification:
                   type: boolean
                   example: true
                 payment_money:
