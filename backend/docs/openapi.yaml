@@ -162,15 +162,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  userId:
-                    type: string
+                  id:
+                    type: integer
+                    example: 2
                     description: "ユーザーID"
-                  name:
+                  email_address:
                     type: string
+                    example: example3@example.com
                     description: "ユーザー名"
-                  email:
-                    type: string
-                    description: "ユーザーのメールアドレス"
         "404":
           description: User not found
           content:

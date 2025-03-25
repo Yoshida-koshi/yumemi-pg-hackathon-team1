@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import views, status
 from .serializer import HabitsSerializer, UsersSerializer
 from rest_framework.response import Response
@@ -59,5 +59,9 @@ class UserView(views.APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({"message": "ユーザーを登録しました"}, status=status.HTTP_201_CREATED)
+    
+    def get(self, request, id, *args, **kwargs):
+        user = get_object_or_404(Users, id=id)
+        return Response({"id": user.id, "email_address": user.email_address}, status=status.HTTP_200_OK)
 
 # Create your views here.
