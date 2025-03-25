@@ -237,67 +237,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
   /user/{userId}/habits/{habitId}:
-    put:
-      tags:
-        - user
-      description: 習慣を更新
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: "ユーザーID"
-          schema:
-            type: string
-        - name: habitId
-          in: path
-          required: true
-          description: "習慣ID"
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                habit_name:
-                  type: string
-                  description: "習慣名"
-                judge_time:
-                  type: string
-                  description: "2025/03/15 00:00:00"
-                period:
-                  type: string
-                  description: "期間"
-      responses:
-        "200":
-          description: Habit updated successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  habitId:
-                    type: string
-                    description: "習慣ID"
-        "400":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        "404":
-          description: Habit not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFoundError"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
     delete:
       tags:
         - user
@@ -627,7 +566,82 @@ paths:
                     example: ユーザーが存在しません
         '500':
           description: Internal Server Error
-
+  /habits/{id}:
+    put:
+      tags:
+        - Habit
+      description: 習慣化項目を更新する
+      parameters:
+        - name: id
+          in: path
+          schema: 
+            type: integer
+          required: true
+          description: 更新する習慣化項目のID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - habit_name
+                - judge_method
+                - judge_time
+                - enable_notification
+                - payment_money
+                - payment_method
+              properties:
+                habit_name:
+                  type: string
+                  example: 筋トレ
+                judge_method:
+                  type: string
+                  example: 腹筋回数
+                judge_time:
+                  type: string
+                  example: 09:00
+                enable_notification:
+                  type: boolean
+                  example: true
+                payment_money:
+                  type: integer
+                  example: 500
+                payment_method:
+                  type: string
+                  example: クレジットカード
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: 習慣化項目を更新しました
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: habit_nameが存在しません
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: 習慣化項目が存在しません
+        '500':
+          description: Internal Server Error
 
 
 components:
