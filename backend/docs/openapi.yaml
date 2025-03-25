@@ -582,18 +582,9 @@ paths:
                         enable_notification:
                           type: boolean
                           example: true
-                        payment:
-                          type: object
-                          properties:
-                            credit_number:
-                              type: string
-                              example: 0000 0000 0000
-                            expire_date:
-                              type: string
-                              example: 08/31
-                            security_code:
-                              type: string
-                              example: 349
+                        payment_method:
+                          type: string
+                          example: クレジットカード
                     - type: object
                       properties:
                         habit_name:
@@ -611,18 +602,9 @@ paths:
                         enable_notification:
                           type: boolean
                           example: false
-                        payment:
-                          type: object
-                          properties:
-                            credit_number:
-                              type: string
-                              example: 0000 0000 0000
-                            expire_date:
-                              type: string
-                              example: 08/31
-                            security_code:
-                              type: string
-                              example: 349
+                        payment_method:
+                          type: string
+                          example: クレジットカード
         '400':
           description: Bad Request
           content:
