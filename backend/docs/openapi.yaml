@@ -7,6 +7,9 @@ info:
   description: ハッカソンのAPI仕様書。
 servers:
   - url: "http://localhost:8003"
+tags:
+  - name: Habit
+    description: 習慣
 paths:
   /auth/signin:
     post:
@@ -389,6 +392,13 @@ paths:
       tags:
         - user
       description: 支払い情報を作成
+      parameters:
+        - name: userId
+          description: 支払い情報を作成するユーザーID
+          in: path
+          required: true
+          schema: 
+            type: integer
       requestBody:
         content:
           application/json:
@@ -534,6 +544,89 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
+  /habits:
+    get:
+      tags:
+        - Habit
+      description: 習慣化項目を取得する
+      parameters:
+        - name: user_id
+          in: query
+          schema: 
+            type: integer
+          required: true
+          description: 習慣化項目を取得するユーザーID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - type: object
+                      properties:
+                        habit_name:
+                          type: string
+                          example: 早起き
+                        judge_time:
+                          type: string
+                          example: 08:00
+                        payment_money:
+                          type: integer
+                          example: 500
+                        judge_method:
+                          type: string
+                          example: 位置情報
+                        enable_notification:
+                          type: boolean
+                          example: true
+                        payment_method:
+                          type: string
+                          example: クレジットカード
+                    - type: object
+                      properties:
+                        habit_name:
+                          type: string
+                          example: 筋トレ
+                        judge_time:
+                          type: string
+                          example: 12:00
+                        payment_money:
+                          type: integer
+                          example: 300
+                        judge_method:
+                          type: string
+                          example: 位置情報
+                        enable_notification:
+                          type: boolean
+                          example: false
+                        payment_method:
+                          type: string
+                          example: クレジットカード
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: user_idが空または存在しません
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ユーザーが存在しません
+        '500':
+          description: Internal Server Error
 
 
 

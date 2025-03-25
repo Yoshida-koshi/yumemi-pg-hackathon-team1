@@ -41,6 +41,8 @@ class Habits(models.Model):
     judge_method = models.CharField(max_length=200, null=False, default='')
     enabled_notification = models.BooleanField(default=True, null=False)
     judge_time = models.DateTimeField(null=False)
+    payment_money = models.IntegerField(null=False, default=0)
+    payment_method = models.CharField(max_length=100, null=False, default='')
     period_id = models.ForeignKey(Period, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
