@@ -1,9 +1,8 @@
 import stripe
 from django.conf import settings
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render, get_object_or_404
 from rest_framework import views, status
 from .serializer import HabitsSerializer, UsersSerializer
 from rest_framework.response import Response
