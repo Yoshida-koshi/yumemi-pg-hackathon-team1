@@ -184,58 +184,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
-    post:
-      tags:
-        - user
-      description: 習慣を追加
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: "ユーザーID"
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                habit:
-                  type: string
-                  description: "習慣名"
-                goal:
-                  type: string
-                  description: "目標"
-                startDate:
-                  type: string
-                  description: "開始日"
-                endDate:
-                  type: string
-                  description: "終了日"
-      responses:
-        "201":
-          description: Habit created successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  habitId:
-                    type: string
-                    description: "習慣ID"
-        "400":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadRequestError"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
   /usr/notification:
     post:
       tags:
@@ -523,6 +471,62 @@ paths:
                   message:
                     type: string
                     example: ユーザーが存在しません
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - Habit
+      description: 習慣化項目を追加する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                habit_name:
+                  type: string
+                  example: 筋トレ
+                judge_method:
+                  type: string
+                  example: 位置情報
+                enabled_notification:
+                  type: string
+                  example: true
+                judge_time:
+                  type: string
+                  example: 09:00
+                user_id:
+                  type: integer
+                  example: 2
+                payment_money:
+                  type: integer
+                  example: 500
+                payment_method:
+                  type: string
+                  example: クレジットカード
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 習慣化項目の追加に成功しました
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  habit_name:
+                    type: array
+                    items:
+                      type: string
+                      example: この項目は必須です。
         '500':
           description: Internal Server Error
   /habits/{id}:

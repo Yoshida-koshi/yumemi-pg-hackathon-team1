@@ -11,7 +11,7 @@ class HabitViews(views.APIView):
         serializer = HabitsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(status=status.HTTP_201_CREATED)
+        return Response({"message": "習慣化項目の追加に成功しました"}, status=status.HTTP_201_CREATED)
     
     def get(self, request, *args, **kwargs):
         user_id = request.GET.get("user_id")
