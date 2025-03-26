@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import '31.dart';
+import '32.dart';
+import '33.dart';
+import '34.dart';
+import '37.dart';
 
+//習慣化項目一覧
 class koumokuPage extends StatefulWidget {
   const koumokuPage({Key? key}) : super(key: key);
 
@@ -19,7 +25,8 @@ class _createPageState extends State<koumokuPage>{
               children: [
                 GestureDetector(
                   onTap: (){
-                    
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => optionPage()));
                   },
                   child: Image.asset("images/reordericon.png",
                       height: 50,
@@ -35,7 +42,7 @@ class _createPageState extends State<koumokuPage>{
                       color: const Color(0x00000000),
                       border: Border.all(
                         color: Colors.black,
-                        width: 2.0,
+                        width: 0,
                                 ),
                               ),
                     child: Column(
@@ -54,7 +61,7 @@ class _createPageState extends State<koumokuPage>{
                     color: const Color(0x00000000),
                     border: Border.all(
                       color: Colors.black,
-                      width: 2.0,
+                      width: 0,
                     ),
                   ),
                   child: Column(
@@ -65,7 +72,8 @@ class _createPageState extends State<koumokuPage>{
                   ),
                       ElevatedButton(
                         onPressed: (){
-
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => checkPage()));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.amber
@@ -92,7 +100,7 @@ class _createPageState extends State<koumokuPage>{
               color: const Color(0x00000000),
               border: Border.all(
                 color: Colors.black,
-                width: 2.0,
+                width: 0,
               ),
             ),
             child: Column(
@@ -111,7 +119,7 @@ class _createPageState extends State<koumokuPage>{
                   color: const Color(0x00000000),
                   border: Border.all(
                     color: Colors.black,
-                    width: 2.0,
+                    width: 0,
                   ),
                 ),
                 child: Column(
@@ -127,7 +135,8 @@ class _createPageState extends State<koumokuPage>{
           ),
           ElevatedButton(
             onPressed: (){
-
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => settingPage()));
             },
             style: ElevatedButton.styleFrom(
                 minimumSize: Size(10, 60),
