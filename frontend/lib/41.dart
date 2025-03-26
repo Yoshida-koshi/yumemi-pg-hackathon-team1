@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'koumoku.dart';
 
+//ログインページ
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
 
@@ -19,15 +20,21 @@ class _createPageState extends State<loginPage>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("メールアドレス"),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+            Container(
+              width: 200,
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
-            Text("パスワード"),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+            Text("\nパスワード"),
+            Container(
+              width: 200,
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
             Row(
@@ -39,11 +46,12 @@ class _createPageState extends State<loginPage>{
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(314, 63),
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.amber,
                   ),
                   child: Text("サインイン",
                   style: TextStyle(
-                    color: Colors.black
+                    color: Colors.white,
+                    fontSize: 20
                   ),
                   ),
               ),
