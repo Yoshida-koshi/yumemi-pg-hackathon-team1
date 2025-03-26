@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '52.dart';
 
+//新規作成ページ
 class createPage extends StatefulWidget {
   const createPage({Key? key}) : super(key: key);
 
@@ -19,21 +20,30 @@ class _createPageState extends State<createPage>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("メールアドレス"),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+            Container(
+              width: 200,
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
             Text("パスワード"),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+            Container(
+              width: 200,
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
             Text("パスワード再入力"),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+            Container(
+              width: 200,
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
             Row(
@@ -45,16 +55,16 @@ class _createPageState extends State<createPage>{
                 },
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(314, 63),
-                        backgroundColor: Colors.white
+                        backgroundColor: Colors.amber
                     ),
                 child: Text("新規作成",
                 style: TextStyle(
-                    color: Colors.black
+                    color: Colors.white,
+                  fontSize: 20
                 ),
                 ),
             ),
-    ],
-            ),
+    ],),
           ],
         ),
       ),
