@@ -71,6 +71,9 @@ flutter:
     - images/Vector 3.png
     - images/camera.png
     - images/folder.png
+    - images/Setting.png
+    - images/plusyellow.png
+    - images/time.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
