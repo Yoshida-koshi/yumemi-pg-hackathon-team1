@@ -14,12 +14,15 @@ class _createPageState extends State<optionPage>{
 
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+          Container(
+          height: 40,
+          width: 40,
+          ),
             Text("通知",
             style: TextStyle(
-              color: Colors.amber
+              color: Colors.amber,
+              fontSize: 15
             ),
             ),
             GestureDetector(
@@ -36,7 +39,8 @@ class _createPageState extends State<optionPage>{
               },
               child: Text("ログアウト",
                 style: TextStyle(
-                    color: Colors.amber
+                    color: Colors.amber,
+                  fontSize: 15
                 ),),
             ),
           ],

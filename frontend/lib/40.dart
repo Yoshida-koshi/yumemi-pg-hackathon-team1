@@ -13,38 +13,98 @@ class _createPageState extends State<createPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Colors.white70.withOpacity(0.9),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("メールアドレス"),
             Container(
-              width: 200,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-              ),
+              height: 30,
+              width: 30,
             ),
-            Text("パスワード"),
-            Container(
-              width: 200,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-              ),
+            Text("　メールアドレス",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15
             ),
-            Text("パスワード再入力"),
+            ),
             Container(
-              width: 200,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+              height: 15,
+              width: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 350,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "example@gmail.com",
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
+            ),
+            Text("　パスワード",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15
+              ),),
+            Container(
+              height: 15,
+              width: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 350,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Text("　パスワード再入力",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15
+              ),),
+            Container(
+              height: 15,
+              width: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 350,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              height: 15,
+              width: 15,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

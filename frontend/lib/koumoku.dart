@@ -22,26 +22,28 @@ class _createPageState extends State<koumokuPage>{
         children: [
             Center(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 GestureDetector(
                   onTap: (){
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) => optionPage()));
                   },
-                  child: Image.asset("images/reordericon.png",
+                  child: Image.asset("images/Setting.png",
                       height: 50,
                       width: 50,
-                      color: Colors.black),
+                      color: Colors.grey),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    width: 200,
+                    width: 180,
                     height: 200,
                     decoration: BoxDecoration(
-                      color: const Color(0x00000000),
+                      color: Colors.amber.withOpacity(0.2),
                       border: Border.all(
-                        color: Colors.black,
+                        color: Colors.white,
                         width: 0,
                                 ),
                               ),
@@ -49,38 +51,64 @@ class _createPageState extends State<koumokuPage>{
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("早起き",
-                          style: TextStyle(fontSize: 25),
+                          style: TextStyle(fontSize: 23,
+                          fontWeight: FontWeight.bold),
                         ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset("images/time.png"),
+                            Text("9:00",
+                            style: TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        Text("￥500",
+                        style: TextStyle(fontSize: 20),)
                       ],
                     ),
                   ),
                 Container(
-                  width: 200,
+                  width: 170,
                   height: 200,
                   decoration: BoxDecoration(
-                    color: const Color(0x00000000),
+                    color: Colors.amber.withOpacity(0.2),
                     border: Border.all(
-                      color: Colors.black,
+                      color: Colors.white,
                       width: 0,
                     ),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  Text("項目名",
-                    style: TextStyle(fontSize: 25),
+                  Text("早起き",
+                    style: TextStyle(fontSize: 23,
+                    fontWeight: FontWeight.bold),
                   ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset("images/time.png"),
+                          Text("9:00",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      Text("￥500",
+                        style: TextStyle(fontSize: 20),
+                      ),
                       ElevatedButton(
                         onPressed: (){
                           Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => checkPage()));
+                              MaterialPageRoute(builder: (_) => check2Page()));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.amber
                         ),
                         child: Text("達成画面へ",
                           style: TextStyle(
-                              color: Colors.white),
+                              color: Colors.white,
+                          fontSize: 20),
                         ),
                       ),
                   ],
@@ -93,61 +121,40 @@ class _createPageState extends State<koumokuPage>{
             ),
           Row(
             children: [
-          Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              color: const Color(0x00000000),
-              border: Border.all(
-                color: Colors.black,
-                width: 0,
-              ),
-            ),
-            child: Column(
+           Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("項目名",
-                  style: TextStyle(fontSize: 25),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => settingPage()));
+                  },
+                  child: Image.asset(
+                    "images/plusyellow.png",
+                    height: 200,
+                    width: 200,
+                ),
                 ),
               ],
             ),
-          ),
               Container(
                 width: 200,
                 height: 200,
                 decoration: BoxDecoration(
                   color: const Color(0x00000000),
                   border: Border.all(
-                    color: Colors.black,
+                    color: Colors.white,
                     width: 0,
                   ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("項目名",
-                      style: TextStyle(fontSize: 25),
-                    ),
+
                   ],
                 ),
               ),
             ],
-          ),
-          ElevatedButton(
-            onPressed: (){
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => settingPage()));
-            },
-            style: ElevatedButton.styleFrom(
-                minimumSize: Size(10, 60),
-                backgroundColor: Colors.white
-            ),
-            child: Text("＋",
-            style: TextStyle(
-                fontSize: 20,
-              color: Colors.black
-            ),
-            ),
           ),
         ],
       ),

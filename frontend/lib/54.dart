@@ -13,23 +13,59 @@ class _createPageState extends State<repassPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Colors.white70.withOpacity(0.9),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("新しいパスワード"),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-              ),
+            Container(
+              height: 40,
+              width: 40,
             ),
-            Text("パスワード再入力"),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-              ),
+            Text("　新しいパスワード\n",
+              style: TextStyle(fontWeight: FontWeight.bold,
+                  fontSize: 15),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 350,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            Text("\n　パスワード再入力\n",
+              style: TextStyle(fontWeight: FontWeight.bold,
+                  fontSize: 15),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 350,
+                  child: TextField(
+                    decoration: InputDecoration(fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              height: 30,
+              width: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -40,11 +76,11 @@ class _createPageState extends State<repassPage>{
                     },
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(314, 63),
-                        backgroundColor: Colors.white
+                        backgroundColor: Colors.amber
                     ),
                     child: Text("パスワード変更",
                       style: TextStyle(
-                          color: Colors.black
+                          color: Colors.white
                       ),)
                 ),
               ],

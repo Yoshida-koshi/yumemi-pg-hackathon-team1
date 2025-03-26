@@ -16,9 +16,9 @@ class _createPageState extends State<resultPage>{
 
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text("メッセージ",
+            Text("Nice!\n\n",
             style: TextStyle(
               color: Colors.amber,
               fontSize: 20

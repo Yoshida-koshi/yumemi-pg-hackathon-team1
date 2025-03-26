@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '40.dart';
 import '41.dart';
 import '42.dart';
+import 'koumoku.dart';
 
 //タイトル画面
 void main() {
@@ -42,11 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset("images/testicon.png",
-                  height: 314,
-                  width: 283),
+              Text("習慣の達人\n",
+              style: TextStyle(fontSize: 45,
+              fontWeight: FontWeight.bold),
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -60,6 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(
                       color: Colors.white),
                 ),
+              ),
+              Container(
+                width: 15,
+                height: 15,
               ),
               ElevatedButton(
                 onPressed: () {
@@ -79,15 +85,24 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.amber),
                 ),
               ),
+              Container(
+                width: 15,
+                height: 15,
+              ),
               GestureDetector(
                 onTap: () {
-
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => koumokuPage()));
                 },
                 child: Text("ゲストログイン",
                   style: TextStyle(fontWeight: FontWeight.bold,
                       color: Colors.amber,
                       fontSize: 17),
                 ),
+              ),
+              Container(
+                width: 15,
+                height: 15,
               ),
               GestureDetector(
                 onTap: () {

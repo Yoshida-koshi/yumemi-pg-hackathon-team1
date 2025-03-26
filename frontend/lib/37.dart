@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'koumoku.dart';
+import '35.dart';
 
 //写真とできた！ページ
 class check2Page extends StatefulWidget {
@@ -69,7 +70,7 @@ class _createPageState extends State<check2Page>{
             ElevatedButton(
                 onPressed: (){
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => koumokuPage()));
+                      MaterialPageRoute(builder: (_) => resultPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(314, 63),

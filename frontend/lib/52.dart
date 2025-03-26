@@ -16,9 +16,9 @@ class _createPageState extends State<donePage>{
 
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("アカウント作成が完了しました。",
+            Text("アカウント作成が完了しました。\n\n",
             style: TextStyle(color: Colors.amber,
             fontWeight: FontWeight.bold,
             fontSize: 20)
